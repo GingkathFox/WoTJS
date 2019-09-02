@@ -8,7 +8,7 @@ let { application_id } = require('../../secret.json')
         let fullURL = `https://api.worldoftanks.com/wot/${subURL}/?application_id=${application_id}`
         
         if (query) {
-            // Cicle each query entry and add to the full url in the form '&key=value'
+            // Circle each query entry and add to the full url in the form '&key=value'
             Object.keys(query).forEach(queryKey => {
                 // query params undefined or empty, or array of length 0
                 if (!query[queryKey] === undefined || query[queryKey] === '') {
@@ -35,9 +35,12 @@ let { application_id } = require('../../secret.json')
                 .then(response => {
                     let data = response.data
                     
-                    if (data.error) {
+                    if (data.error) { // If there's a error...
                         throw Error(`\nCall to '${subURL}' failed with error ${data.error.code}: \n${data.error.message}\nValue was: '${data.error.value}'`)
+                        // ..throw the error and exit
                     }
+
+                    // return the data
                     return data.data
                     
                 }).catch((error) => {
