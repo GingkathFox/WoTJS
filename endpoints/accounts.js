@@ -2,7 +2,15 @@ let request = require('./Utility/request')
 let paramVerification = require('./Utility/paramVerification')
 
 module.exports = {
-
+    
+    /**
+     * Returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
+     * @async
+     * @param {[string]} playerName 
+     * @param {string} type 
+     * @param {[string]} fields 
+     * @param {number} limit 
+     */
     players(playerName = [], type = 'startswith', fields = [], limit) {
 
             paramVerification({ 
@@ -36,7 +44,14 @@ module.exports = {
             }
         })
     },
-
+    
+    /**
+     * Returns player details.
+     * @param {[number]} account_id 
+     * @param {[string]} extra 
+     * @param {[string]} fields 
+     * @param {string} access_token 
+     */
     playerPersonalData(account_id = [], extra = [], fields = [], access_token = '') {
 
         let extraOptions = [
@@ -92,6 +107,12 @@ module.exports = {
 
     },
 
+    /**
+     * Returns details on player's vehicles.
+     * @param {[number]} account_id 
+     * @param {[string]} fields 
+     * @param {string} access_token 
+     */
     playerVehicles(account_id = [], fields = [], access_token = '') {
 
         paramVerification({
@@ -122,6 +143,16 @@ module.exports = {
         })
     },
 
+    /**
+     * Returns players' achievement details.
+     * 
+     * Achievement properties define the achievements field values:
+     * - 1-4 for Mastery Badges and Stage Achievements (type: "class");
+     * - maximum value of Achievement series (type: "series");
+     * - number of achievements earned from sections: Battle Hero, Epic Achievements, Group Achievements, Special Achievements, etc. (type: "repeatable, single, custom").
+     * @param {[number]} account_id 
+     * @param {[string]} fields 
+     */
     playerAchievements(account_id, fields = []) {
 
         paramVerification({
