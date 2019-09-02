@@ -47,6 +47,7 @@ module.exports = {
     
     /**
      * Returns player details.
+     * @async
      * @param {[number]} account_id 
      * @param {[string]} extra 
      * @param {[string]} fields 
@@ -109,6 +110,7 @@ module.exports = {
 
     /**
      * Returns details on player's vehicles.
+     * @async
      * @param {[number]} account_id 
      * @param {[string]} fields 
      * @param {string} access_token 
@@ -150,6 +152,7 @@ module.exports = {
      * - 1-4 for Mastery Badges and Stage Achievements (type: "class");
      * - maximum value of Achievement series (type: "series");
      * - number of achievements earned from sections: Battle Hero, Epic Achievements, Group Achievements, Special Achievements, etc. (type: "repeatable, single, custom").
+     * @async
      * @param {[number]} account_id 
      * @param {[string]} fields 
      */
