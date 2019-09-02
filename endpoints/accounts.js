@@ -156,7 +156,7 @@ module.exports = {
      * @param {[number]} account_id 
      * @param {[string]} fields 
      */
-    playerAchievements(account_id, fields = []) {
+    playerAchievements(account_id = [], fields = []) {
 
         paramVerification({
             input: account_id, 

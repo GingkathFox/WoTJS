@@ -5,6 +5,11 @@ let { application_id } = require('../../secret.json')
 
     function request({subURL, post = false, body, query}) {
         let request
+
+        if (application_id == undefined) {
+           return console.log(`WotJS requires a application ID to access the endpoints. Please create a application and get its ID at https://developers.wargaming.net/applications/.`)
+        }
+        
         let fullURL = `https://api.worldoftanks.com/wot/${subURL}/?application_id=${application_id}`
         
         if (query) {
