@@ -27,6 +27,7 @@ let { application_id } = require('../../secret.json')
             request = axios.post(fullURL, body) 
         } else {
             request = axios.get(fullURL) 
+            console.log(fullURL)
         }
 
         // Return the promise request, pre set the 'then' and 'catch' clauses
@@ -37,7 +38,7 @@ let { application_id } = require('../../secret.json')
                     if (data.error) {
                         throw Error(`\nCall to '${subURL}' failed with error ${data.error.code}: \n${data.error.message}\nValue was: '${data.error.value}'`)
                     }
-                    return data
+                    return data.data
                     
                 }).catch((error) => {
                     console.error(`Call to '${subURL}' failed with error:`, error)
