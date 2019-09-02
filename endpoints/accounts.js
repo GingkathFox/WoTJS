@@ -16,7 +16,7 @@ module.exports = {
             paramVerification({ 
                 input: playerName, 
                 type: 'object', 
-                message: `The function 'account.players'requires a array of strings consisting of one or more player names.`
+                message: `The function 'account.players' requires a array of strings consisting of one or more player names.`
             })
             paramVerification({ 
                 input: type, 
