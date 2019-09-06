@@ -7,16 +7,16 @@ WoTJS is a NodeJS module to make getting info from the WoT API much easier. Endp
 ```js
 let wotJS = require('wotjs')
 
-let data = await wotJS.<group>.function()
-                .catch(function(e) {
+let data = wotJS.<group>.function()
+                .catch(function(e) { // .catch() is used when you dont `await` a function
                     // Whatever you want to do with errors
                 })
 // or...
 
 let moreData;
-try {
+try { 
     moreData = await wotJS.<group>.function()
-} catch(e) {
+} catch(e) { // try/catch is used when you do `await` a function
     // Error? What error?
 }
 ```
