@@ -25,15 +25,24 @@ The WoT API requires a application ID to access the endpoints. For WoTJS to find
 
 # FUNCTIONS
 
+Arguments with a asterick (*) by their name are required. 
+If you need to skip a argument, add this line to the top of your code:
+
+`let _ = undefined`
+
+Then use it like so:
+
+`wotJS.<group>.function(arg1, _, _, arg2)`
+
 ```js
 // Accounts
-wotJS.accounts.players(playerNames, type, fields, limit)
-wotJS.accounts.playerPersonalData(PlayerIDs, extra, fields, access_token)
-wotJS.accounts.playerVehicles(PlayerIDs, fields, access_token)
-wotJS.accounts.playerAchievements(PlayerIDs, fields)
+wotJS.accounts.players(*playerNames, type, fields, limit)
+wotJS.accounts.playerPersonalData(*PlayerIDs, extra, fields, access_token)
+wotJS.accounts.playerVehicles(*PlayerIDs, fields, access_token)
+wotJS.accounts.playerAchievements(*PlayerIDs, fields)
 
 // Strongholds
 
-wotJS.strongholds.clanInfo(clanIDs, fields)
-wotJS.strongholds.clanReserves(clanIDs, fields)
-wotJS.strongholds.activateClanReserve(access_token, reserve_level, reserve_type, fields)
+wotJS.strongholds.clanInfo(*clanIDs, fields)
+wotJS.strongholds.clanReserves(*clanIDs, fields)
+wotJS.strongholds.activateClanReserve(*access_token, *reserve_level, *reserve_type, fields)

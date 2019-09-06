@@ -1,5 +1,5 @@
 let request = require('./Utility/request')
-let paramVerification = require('./Utility/paramVerification')
+let paramValidation = require('./Utility/paramValidation')
 
 module.exports = {
     
@@ -10,26 +10,27 @@ module.exports = {
      * @param {string} type 
      * @param {[string]} fields 
      * @param {number} limit 
+     * @returns {JSON}
      */
     players(playerName = [], type = 'startswith', fields = [], limit) {
 
-            paramVerification({ 
+            paramValidation({ 
                 input: playerName, 
                 type: 'object', 
                 message: `The function 'account.players' requires a array of strings consisting of one or more player names.`
             })
-            paramVerification({ 
+            paramValidation({ 
                 input: type, 
                 type: 'string', 
                 message: `The parameter 'type' of 'account.players' must be either 'startswith' or 'exact'.`
             })
-            paramVerification({
+            paramValidation({
                 input: fields,
                 type: 'object',
                 message: `The parameter 'fields' of the function 'accounts.players' must be a array of strings.`,
                 optional: true
             })
-            paramVerification({
+            paramValidation({
                 input: limit,
                 type: 'number',
                 message: `The parameter 'number' of the function 'accounts.players' must be a array of strings.`,
@@ -52,6 +53,7 @@ module.exports = {
      * @param {[string]} extra 
      * @param {[string]} fields 
      * @param {string} access_token 
+     * @returns {JSON}
      */
     playerPersonalData(account_id = [], extra = [], fields = [], access_token = '') {
 
@@ -72,24 +74,25 @@ module.exports = {
             "statistics.ranked_battles_previous"
         ]
 
-        paramVerification({
+        paramValidation({
             input: account_id, 
             type: 'object', 
             message: `The function 'accounts.playerPersonalData' requires a array of one or more player IDs.`
         })
-        paramVerification({
+        paramValidation({
             input: extra,
             type: 'object',
-            message: `The parameter 'extra' of the function 'accounts.playerPersonalData' must be a array of strings consisting of one or more of these options: \n${extraOptions.join(', ')}`,
+            message: `The parameter 'extra' of the function 'accounts.playerPersonalData' must be a array of strings consisting of one or more of the options below.`,
+            options: extraOptions,
             optional: true
         })
-        paramVerification({
+        paramValidation({
             input: fields,
             type: 'object',
             message: `The parameter 'fields' of the function 'accounts.playerPersonalData' must be a array of strings.`,
             optional: true
         })
-        paramVerification({
+        paramValidation({
             input: access_token,
             type: 'string',
             message: `The parameter 'access_token' of the function 'accounts.playerPersonalData' must be a string.`,
@@ -114,21 +117,22 @@ module.exports = {
      * @param {[number]} account_id 
      * @param {[string]} fields 
      * @param {string} access_token 
+     * @returns {JSON}
      */
     playerVehicles(account_id = [], fields = [], access_token = '') {
 
-        paramVerification({
+        paramValidation({
             input: account_id, 
             type: 'object', 
             message: `The function 'accounts.playerVehicles' requires a array of one or more player IDs.`
         })
-        paramVerification({
+        paramValidation({
             input: fields,
             type: 'object',
             message: `The parameter 'fields' of the function 'accounts.playerVehicles' must be a array of strings.`,
             optional: true
         })
-        paramVerification({
+        paramValidation({
             input: access_token,
             type: 'string',
             message: `The parameter 'access_token' of the function 'accounts.playerVehicles' must be a string.`,
@@ -155,15 +159,16 @@ module.exports = {
      * @async
      * @param {[number]} account_id 
      * @param {[string]} fields 
+     * @returns {JSON}
      */
     playerAchievements(account_id = [], fields = []) {
 
-        paramVerification({
+        paramValidation({
             input: account_id, 
             type: 'object', 
             message: `The function 'accounts.playerAchievements' requires a array of one or more player IDs.`
         })
-        paramVerification({
+        paramValidation({
             input: fields,
             type: 'object',
             message: `The parameter 'fields' of the function 'accounts.playerAchievements' must be a array of strings.`,

@@ -3,12 +3,16 @@ module.exports = inputValidation
 function inputValidation ({ input, type, message, options, optional = false }) {
 
     // throwError utility function
-    const throwError = () => {
+    function throwError(optionList) {
         console.log(`\n`)
-        throw new Error(message)
+
+        if (optionList) {
+            message += `\n\nValid options: ${optionList.join(', ')}`
+        }
+        throw Error(message)
     }
 
-    // If is optional and input is undefined, no need to validate
+    // If parameter is optional and input is undefined, no need to validate
     if (optional && input === undefined) {
         return
     }
@@ -22,7 +26,7 @@ function inputValidation ({ input, type, message, options, optional = false }) {
     }
     // If options is provided, check that input is included
     if (options && !options.includes(input)) {
-        throwError()
+        throwError(options)
     }
 }
 
