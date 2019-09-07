@@ -89,3 +89,6 @@ typings/
 
 # App ID
 secret.json
+
+# macOS specific
+.DS_Store
