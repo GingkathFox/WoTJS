@@ -252,7 +252,7 @@ module.exports = {
     },
 
     /**
-     * 
+     * Returns list of clan's battles on the Global Map.
      * @async
      * @param {[number]} clan_id 
      * @param {string} access_token 
@@ -419,7 +419,15 @@ module.exports = {
         })
     },
 
-
+    /**
+     * Returns player's statistics for a specific season.
+     * @async
+     * @param {number} account_id 
+     * @param {string} season_id 
+     * @param {string} vehicle_level 
+     * @param {[string]} fields 
+     * @returns {JSON}
+     */
     seasonAccountData(account_id, season_id, vehicle_level, fields = []) {
         
         paramValidation({
@@ -454,4 +462,163 @@ module.exports = {
             }
         })
     },
+
+    /**
+     * Returns season clan rating.
+     * @async
+     * @param {string} season_id 
+     * @param {string} vehicle_level 
+     * @param {[string]} fields 
+     * @param {number} limit 
+     * @param {number} page_no 
+     * @returns {JSON}
+     */
+    seasonRating(season_id, vehicle_level, fields = [], limit, page_no = 1) {
+
+        paramValidation({
+            input: season_id,
+            type: 'string',
+            message: `The function 'globalMap.seasonRating' requires a season ID.`
+        })
+        paramValidation({
+            input: vehicle_level,
+            type: 'string',
+            message: `The function 'globalMap.seasonRating' requires a vehicle level.`
+        })
+        paramValidation({
+            input: fields,
+            type: 'object',
+            message: `The parameter 'fields' of the function 'globalMap.seasonRating' must be a array of one or more strings.`,
+            optional: true
+        })
+        paramValidation({
+            input: limit,
+            type: 'number',
+            message: `The parameter 'limit' of the function 'globalMap.seasonAccountData' must be a number.`,
+            optional: true
+        })
+        paramValidation({
+            input: page_no,
+            type: 'number',
+            message: `The parameter 'page_no' of the function 'globalMap.seasonAccountData' must be a number.`,
+            optional: true
+        })
+
+        return request({
+            subURL: `globalmap/seasonrating`,
+            query: {
+                season_id,
+                vehicle_level,
+                fields,
+                limit,
+                page_no
+            }
+        })
+    },
+
+    /**
+     * Returns list of adjacent positions in season clan rating.
+     * @async
+     * @param {number} clan_id 
+     * @param {string} season_id 
+     * @param {string} vehicle_level 
+     * @param {[string]} fields 
+     * @param {number} limit 
+     * @returns {JSON}
+     */
+    seasonRatingNeighbors(clan_id, season_id, vehicle_level, fields = [], limit) {
+
+        paramValidation({
+            input: clan_id,
+            type: 'number',
+            message: `The function 'globalMap.seasonRatingNeighbors' requires a clan ID.`
+        })
+        paramValidation({
+            input: season_id,
+            type: 'number',
+            message: `The function 'globalMap.seasonRatingNeighbors' requires a season ID.`
+        })
+        paramValidation({
+            input: vehicle_level,
+            type: 'number',
+            message: `The function 'globalMap.seasonRatingNeighbors' requires a vehicle level.`
+        })
+        paramValidation({
+            input: fields,
+            type: 'object',
+            message: `The parameter 'fields' in the function 'globalMap.seasonRatingNeighbors' must be a array of strings.`,
+            optional: true
+        })
+        paramValidation({
+            input: limit,
+            type: 'number',
+            message: `The parameter 'limit' of the function 'globalMap.seasonRatingNeighbors' must be a number.`,
+            optional: true
+        })
+
+        return request({
+            subURL: `globalmap/seasonratingneighbors`,
+            query: {
+                clan_id,
+                season_id,
+                vehicle_level,
+                fields,
+                limit
+            }
+        })
+    },
+
+    /**
+     * Returns events information.
+     * @async
+     * @param {string} event_id 
+     * @param {string} status 
+     * @param {[string]} fields 
+     * @param {number} limit 
+     * @param {number} page_no 
+     * @returns {JSON}
+     */
+    events(event_id, status, fields = [], limit, page_no = 1) {
+
+        paramValidation({
+            input: event_id,
+            type: 'string',
+            message: `The parameter 'event_id' in the function 'globalMap.events' must be a valid event ID.`,
+            optional: true
+        })
+        paramValidation({
+            input: status,
+            type: 'string',
+            message: `The parameter 'status' in the function 'globalMap.events' must be a valid status.`,
+            optional: true
+        })
+        paramValidation({
+            input: fields,
+            type: 'object',
+            message: `The parameter 'fields' in the function 'globalMap.events' must be a array of strings.`,
+            optional: true
+        })
+        paramValidation({
+            input: limit,
+            type: 'number',
+            message: `The parameter 'limit' in the function 'globalMap.events' must be a number.`,
+            optional: true
+        })
+        paramValidation({
+            input: page_no,
+            type: 'number',
+            message: `The parameter 'page_no' in the function 'globalMap.events' must be a number.`
+        })
+
+        return request({
+            subURL: `globalmap/events`,
+            query: {
+                event_id,
+                status,
+                fields,
+                limit,
+                page_no
+            }
+        })
+    }
 }
