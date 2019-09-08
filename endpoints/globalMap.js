@@ -92,7 +92,7 @@ module.exports = {
                 paramValidation({
                     input: front_id,
                     type: 'string',
-                    message: `The function 'globalMap.provinces' requires a front ID.`,
+                    message: `The function 'globalMap.provinces' requires a valid Front ID.`,
                 })
                 paramValidation({
                     input: arena_id,
@@ -188,7 +188,7 @@ module.exports = {
         paramValidation({ 
             input: clan_id, 
             type: 'object', 
-            message: `The function 'globalMap.clanInfo' requires a array of strings consisting of one or more clan IDs.`
+            message: `The function 'globalMap.clanInfo' requires a array of strings consisting of one or more valid Clan IDs.`
         })
         paramValidation({
             input: access_token,
@@ -226,7 +226,7 @@ module.exports = {
         paramValidation({
             input: clan_id,
             type: 'object',
-            message: `The function 'globalMap.clanProvinces' requires a array of one or more clan IDs.`
+            message: `The function 'globalMap.clanProvinces' requires a array of one or more valid Clan IDs.`
         })
         paramValidation({
             input: access_token,
@@ -266,7 +266,7 @@ module.exports = {
         paramValidation({
             input: clan_id,
             type: 'object',
-            message: `The function 'globalMap.clanBattles' requires a array of one or more clan IDs.`
+            message: `The function 'globalMap.clanBattles' requires a array of one or more valid Clan IDs.`
         })
         paramValidation({
             input: access_token,
@@ -386,7 +386,7 @@ module.exports = {
         paramValidation({
             input: clan_id,
             type: 'object',
-            message: `The function 'globalMap.seasonClanInfo' requires a array of one or more clan IDs.`
+            message: `The function 'globalMap.seasonClanInfo' requires a array of one or more valid Clan IDs.`
         })
         paramValidation({
             input: season_id,
@@ -433,7 +433,7 @@ module.exports = {
         paramValidation({
             input: account_id,
             type: 'number',
-            message: `The function 'globalMap.seasonAcccountData' requires a account ID.`
+            message: `The function 'globalMap.seasonAcccountData' requires a valid account ID.`
         })
         paramValidation({
             input: season_id,
@@ -531,12 +531,12 @@ module.exports = {
         paramValidation({
             input: clan_id,
             type: 'number',
-            message: `The function 'globalMap.seasonRatingNeighbors' requires a clan ID.`
+            message: `The function 'globalMap.seasonRatingNeighbors' requires a valid Clan ID.`
         })
         paramValidation({
             input: season_id,
             type: 'number',
-            message: `The function 'globalMap.seasonRatingNeighbors' requires a season ID.`
+            message: `The function 'globalMap.seasonRatingNeighbors' requires a valid Season ID.`
         })
         paramValidation({
             input: vehicle_level,
@@ -583,7 +583,7 @@ module.exports = {
         paramValidation({
             input: event_id,
             type: 'string',
-            message: `The parameter 'event_id' in the function 'globalMap.events' must be a valid event ID.`,
+            message: `The parameter 'event_id' in the function 'globalMap.events' must be a valid Event ID.`,
             optional: true
         })
         paramValidation({
@@ -620,5 +620,109 @@ module.exports = {
                 page_no
             }
         })
-    }
+    },
+
+    /**
+     * Returns clan's statistics for a specific event.
+     * @async
+     * @param {number} clan_id 
+     * @param {string} event_id 
+     * @param {string} front_id 
+     * @param {[string]} fields 
+     * @returns {JSON}
+     */
+    eventClanInfo(clan_id, event_id, front_id = [], fields = []) {
+
+        paramValidation({
+            input: clan_id,
+            type: 'number',
+            message: `The function 'globalMap.eventClanInfo' requires a valid Clan ID.`
+        })
+        paramValidation({
+            input: event_id,
+            type: 'string',
+            message: `The function 'globalMap.eventClanInfo' requires a valid Event ID.`
+        })
+        paramValidation({
+            input: front_id,
+            type: 'object',
+            message: `The function 'globalMap.eventClanInfo' requires a array of one or more valid Front IDs.`
+        })
+        paramValidation({
+            input: fields,
+            type: 'object',
+            message: `The parameter 'fields' in the function 'globalMap.eventClanInfo' must be a array of strings.`,
+            optional: true
+        })
+
+        return request({
+            subURL: `globalmap/eventclaninfo`,
+            query: {
+                clan_id,
+                event_id,
+                front_id,
+                fields
+            }
+        })
+    },
+
+    /**
+     * Returns player's statistics for a specific event.
+     * @async
+     * @param {number} account_id 
+     * @param {string} event_id 
+     * @param {[string]} front_id 
+     * @param {number} clan_id 
+     * @param {[string]} fields
+     * @returns {JSON} 
+     */
+    eventAccountInfo(account_id, event_id, front_id = [], clan_id, fields = []) {
+
+        paramValidation({
+            input: account_id,
+            type: 'number',
+            message: `The function 'globalMap.eventAccountInfo' requires a valid account ID.`
+        })
+        paramValidation({
+            input: event_id,
+            type: 'string',
+            message: `The function 'globalMap.eventAccountInfo' requires a valid Event ID.`
+        })
+        paramValidation({
+            input: event_id,
+            type: 'object',
+            message: `The function 'globalMap.eventAccountInfo' requires a array of one or more valid Front IDs.`
+        })
+        paramValidation({
+            input: front_id,
+            type: 'object',
+            message: `The function 'globalMap.eventAccountInfo' requires a array of one or more valid Event IDs.`
+        })
+        paramValidation({
+            input: clan_id,
+            type: 'number',
+            message: `The parameter 'clan_id' in the function 'globalMap.eventAccountInfo' must be a valid Clan ID.`,
+            optional: true
+        })
+        paramValidation({
+            input: fields,
+            type:'object',
+            message: `The parameter 'fields' in the function 'globalMap.eventAccountInfo' must be a array of strings.`,
+            optional: true
+        })
+
+        return request({
+            subURL: `globalmap/eventaccountinfo`,
+            query: {
+                account_id,
+                event_id,
+                front_id,
+                clan_id,
+                fields
+            }
+        })
+    },
+
+    
+    
 }

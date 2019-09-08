@@ -5,9 +5,8 @@ function inputValidation ({ input, type, message, options, optional = false }) {
     // throwError utility function
     function throwError(optionList) {
         console.log(`\n`)
-
         if (optionList) {
-            message += `\n\nValid options: ${optionList.join(', ')}`
+            message += `\n\nValid options: ${optionList.join(', ')}\n`
         }
         throw Error(message)
     }
@@ -25,8 +24,10 @@ function inputValidation ({ input, type, message, options, optional = false }) {
         throwError()
     }
     // If options is provided, check that input is included
-    if (options && !options.includes(input)) {
+    if (options && !options.includes(input) && !optional) {
         throwError(options)
+    } else {
+        return
     }
 }
 
