@@ -723,6 +723,55 @@ module.exports = {
         })
     },
 
-    
+    eventAccountRatings(event_id, front_id, in_rating, limit, page_no, fields = []) {
+        
+        paramValidation({
+            input: event_id,
+            type: 'string',
+            message: `The function 'globalMap.eventAccountRatings' requires a valid Event ID.`
+        })
+        paramValidation({
+            input: front_id,
+            type: 'string',
+            message: `The function 'globalMap.eventAccountRatings' requires a valid Front ID.`
+        })
+        paramValidation({
+            input: in_rating,
+            type: 'number',
+            message: `The parameter 'in_rating' in the function 'globalMap.eventAccountRatings' must be a number.`,
+            optional: true
+        })
+        paramValidation({
+            input: limit,
+            type: 'number',
+            message: `The parameter 'limit' in the function 'globalMap.eventAccountRatings' must be a number.`,
+            optional: true
+        })
+        paramValidation({
+            input: page_no,
+            type: 'number',
+            message: `The parameter 'page_no' in the function 'globalMap.eventAccountRatings' must be a number.`,
+            optional: true
+        })
+        paramValidation({
+            input: fields,
+            type: 'string',
+            message: `The parameter 'fields' in the function 'globalMap.eventAccountRatings' must be a array of strings.`,
+            optional: true
+        })
+
+        return request({
+            subURL: `globalmap/eventaccountratings`,
+            query: {
+                event_id,
+                front_id,
+                in_rating,
+                limit,
+                page_no,
+                fields
+            }
+        })
+    },
+
     
 }
