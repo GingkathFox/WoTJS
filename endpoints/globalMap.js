@@ -723,6 +723,17 @@ module.exports = {
         })
     },
 
+    /**
+     * Returns account event rating.
+     * @async
+     * @param {string} event_id 
+     * @param {string} front_id 
+     * @param {number} in_rating 
+     * @param {number} limit 
+     * @param {number} page_no 
+     * @param {[string]} fields 
+     * @returns {JSON}
+     */
     eventAccountRatings(event_id, front_id, in_rating, limit, page_no, fields = []) {
         
         paramValidation({
