@@ -784,5 +784,16 @@ module.exports = {
         })
     },
 
-    
+    eventAccountRatingNeighbors(account_id, event_id, front_id, neighbours_count, limit, page_no, fields = []) {
+        paramValidation({
+            input: account_id,
+            type: 'string',
+            message: `The function 'globalMap.eventAccountratingNeighbors' requires a Account ID.` 
+        })
+        paramValidation({
+            input: event_id,
+            type: 'string',
+            message: `The function 'globalMap.eventAccountratingNeighbors' requires a Event ID.` 
+        })
+    }
 }
